@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <main className="bg-[url('/images/bg-main.svg')] bg-cover">
       <Navbar />
-      <section className="main-seciton">
+      <section className="main-seciton ">
         <div className="page-heading py-16">
           <h1 className="sm:max-w-3xl">
             Track Your Application & Resume Ratings

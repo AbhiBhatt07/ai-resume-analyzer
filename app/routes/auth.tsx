@@ -1,39 +1,41 @@
+
+// ============= auth.tsx =============
 import { useEffect } from "react";
 import { usePuterStore } from "~/lib/puter";
 import { useLocation, useNavigate } from "react-router";
-// Import some meta data first
+import { LogIn, Loader2 } from "lucide-react";
+
 export const meta = () => [
   { title: "Resumind | Auth" },
-  { name: "description", content: "Login into your account " },
+  { name: "description", content: "Login into your account" },
 ];
 
-
-
 const Auth = () => {
-  // Access puter store 
-  const { isLoading, auth } = usePuterStore()
+  const { isLoading, auth } = usePuterStore();
   const location = useLocation();
-  // Get next page from url 
   const next = location.search.split("next=")[1];
   const navigate = useNavigate();
 
-  // Redirect to next page if authenticated 
   useEffect(() => {
-    if (auth.isAuthenticated) navigate(next)
-  }, [auth.isAuthenticated, next])
+    if (auth.isAuthenticated) navigate(next);
+  }, [auth.isAuthenticated, next]);
 
   return (
-    <main className="bg-[url('/images/bg-auth.svg')] bg-cover min-h-screen flex justify-center items-center">
-      <div className="gradient-border shadow-lg">
-        <section className="flex flex-col gap-8 bg-white rounded-2xl p-10">
-          <div className="flex flex-col items-center gap-2 text-center">
-            <h1>Welcome</h1>
-            <h2>Log In to Continue Your Job Journey</h2>
+    <main className="bg-dark-bg min-h-screen flex justify-center items-center p-4">
+      <div className="border border-zinc-800 rounded-2xl shadow-2xl bg-dark-card/50 backdrop-blur-xl">
+        <section className="flex flex-col gap-8 bg-dark-card rounded-2xl p-8 md:p-12 max-w-lg">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <div className="p-4 bg-accent/10 rounded-full">
+              <LogIn className="w-8 h-8 text-accent" />
+            </div>
+            <h1 className="text-3xl md:text-4xl">Welcome Back</h1>
+            <h2 className="text-zinc-400">Sign in to continue your journey</h2>
           </div>
           <div>
             {isLoading ? (
-              <button className="auth-button animate-pulse">
-                <p>Signing you in.....</p>
+              <button className="auth-button flex items-center justify-center gap-3 animate-pulse" disabled>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                <p>Signing you in...</p>
               </button>
             ) : (
               <>
@@ -42,8 +44,9 @@ const Auth = () => {
                     <p>Log Out</p>
                   </button>
                 ) : (
-                  <button className="auth-button" onClick={auth.signIn}>
-                    <p>Log In</p>
+                  <button className="auth-button flex items-center justify-center gap-3" onClick={auth.signIn}>
+                    <LogIn className="w-5 h-5" />
+                    <p>Sign In</p>
                   </button>
                 )}
               </>
@@ -52,7 +55,8 @@ const Auth = () => {
         </section>
       </div>
     </main>
-  )
+  );
 };
 
 export default Auth;
+

@@ -1,3 +1,4 @@
+// ============= ScoreBadge.tsx =============
 import React from 'react';
 
 interface ScoreBadgeProps {
@@ -5,11 +6,18 @@ interface ScoreBadgeProps {
 }
 
 const ScoreBadge = ({ score }: ScoreBadgeProps) => {
-  const badgeColor = score > 70 ? 'bg-badge-green text-green-600' : score > 49 ? 'bg-badge-yellow text-yellow-600' : 'bg-badge-red text-red-600';
+  const badgeStyle =
+    score > 70
+      ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+      : score > 49
+        ? 'bg-amber-500/10 text-amber-500 border-amber-500/20'
+        : 'bg-red-500/10 text-red-500 border-red-500/20';
+
+  const label = score > 70 ? 'Strong' : score > 49 ? 'Good Start' : 'Needs Work';
 
   return (
-    <div className={`p-1 rounded-4xl text-sm ${badgeColor}`}>
-      <p>{score > 70 ? 'Strong' : score > 49 ? 'Good Start' : 'Needs work'}</p>
+    <div className={`px-3 py-1 rounded-full text-xs font-medium border ${badgeStyle}`}>
+      {label}
     </div>
   );
 };

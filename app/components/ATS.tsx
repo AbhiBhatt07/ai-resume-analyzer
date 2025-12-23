@@ -1,3 +1,6 @@
+// ============= ATS.tsx =============
+import { AlertCircle, CheckCircle2, TrendingUp } from "lucide-react";
+
 interface Suggestion {
   type: "good" | "improve";
   tip: string;
@@ -9,101 +12,72 @@ interface ATSProps {
 }
 
 const ATS = ({ score, suggestions }: ATSProps) => {
-  // Determine gradient background based on score
-  const getBackgroundGradient = () => {
-    if (score > 69) return "from-green-100";
-    if (score > 49) return "from-yellow-100";
-    return "from-red-100";
+  const getScoreColor = () => {
+    if (score > 69) return "text-emerald-500";
+    if (score > 49) return "text-amber-500";
+    return "text-red-500";
   };
 
-  // Determine icon and label based on score
   const getIconAndLabel = () => {
     if (score > 69) {
-      return {
-        icon: "/icons/ats-good.svg",
-        label: "Good ATS Score",
-      };
+      return { icon: CheckCircle2, label: "Excellent ATS Score", color: "text-emerald-500" };
     }
     if (score > 49) {
-      return {
-        icon: "/icons/ats-warning.svg",
-        label: "Moderate ATS Score",
-      };
+      return { icon: AlertCircle, label: "Moderate ATS Score", color: "text-amber-500" };
     }
-    return {
-      icon: "/icons/ats-bad.svg",
-      label: "Low ATS Score",
-    };
+    return { icon: AlertCircle, label: "Needs Improvement", color: "text-red-500" };
   };
 
-  const { icon, label } = getIconAndLabel();
-  const backgroundGradient = getBackgroundGradient();
+  const { icon: Icon, label, color } = getIconAndLabel();
 
   return (
-    <div
-      className={`rounded-lg bg-gradient-to-br ${backgroundGradient} to-white p-6 shadow-md border border-gray-200`}
-    >
-      {/* Top Section with Icon and Headline */}
-      <div className="mb-4 flex items-start gap-4">
-        <img
-          src={icon}
-          alt={label}
-          className="h-12 w-12 flex-shrink-0"
-        />
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">
-            ATS Score - {score}/100
-          </h2>
-          <p className="text-sm text-gray-600">{label}</p>
+    <div className="bg-dark-card border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-all duration-300">
+      <div className="mb-6 flex items-start gap-4">
+        <div className={`p-3 rounded-xl bg-zinc-900 ${color}`}>
+          <Icon className="h-8 w-8" />
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center gap-3 mb-2">
+            <h2 className="text-2xl font-bold text-white">ATS Score</h2>
+            <span className={`text-3xl font-bold ${getScoreColor()}`}>{score}/100</span>
+          </div>
+          <p className="text-sm text-zinc-400">{label}</p>
         </div>
       </div>
 
-      {/* Description Section */}
-      <div className="mb-6 border-t border-gray-300 pt-4">
-        <h3 className="mb-2 font-semibold text-gray-800">
-          Optimize for ATS Systems
-        </h3>
-        <p className="text-sm text-gray-600 leading-relaxed">
-          ATS (Applicant Tracking Systems) scan your resume for keywords and
-          formatting. Improving your ATS score increases your chances of passing
-          automated screening and reaching human recruiters.
-        </p>
+      <div className="mb-6 pb-6 border-b border-zinc-800">
+        <div className="flex items-start gap-3">
+          <TrendingUp className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+          <div>
+            <h3 className="mb-2 font-semibold text-white text-sm">Optimize for ATS Systems</h3>
+            <p className="text-sm text-zinc-400 leading-relaxed">
+              ATS (Applicant Tracking Systems) scan your resume for keywords and formatting. 
+              Improving your ATS score increases your chances of passing automated screening.
+            </p>
+          </div>
+        </div>
       </div>
 
-      {/* Suggestions List */}
       {suggestions.length > 0 && (
-        <div className="mb-6">
-          <h4 className="mb-3 font-semibold text-gray-800">Suggestions</h4>
-          <ul className="space-y-2">
-            {suggestions.map((suggestion, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <img
-                  src={
-                    suggestion.type === "good"
-                      ? "/icons/check.svg"
-                      : "/icons/warning.svg"
-                  }
-                  alt={suggestion.type}
-                  className="mt-0.5 h-5 w-5 flex-shrink-0"
-                />
-                <span className="text-sm text-gray-700">
-                  {suggestion.tip}
-                </span>
-              </li>
-            ))}
-          </ul>
+        <div className="space-y-3">
+          <h4 className="font-semibold text-white text-sm mb-4">Recommendations</h4>
+          {suggestions.map((suggestion, index) => (
+            <div
+              key={index}
+              className="flex items-start gap-3 p-3 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 transition-colors"
+            >
+              {suggestion.type === "good" ? (
+                <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+              ) : (
+                <AlertCircle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+              )}
+              <span className="text-sm text-zinc-300">{suggestion.tip}</span>
+            </div>
+          ))}
         </div>
       )}
-
-      {/* Closing Line */}
-      <div className="border-t border-gray-300 pt-4">
-        <p className="text-sm font-medium text-gray-800 italic">
-          Implement these suggestions to improve your resume's ATS compatibility
-          and increase your chances of success.
-        </p>
-      </div>
     </div>
   );
 };
 
-export default ATS
+export default ATS;

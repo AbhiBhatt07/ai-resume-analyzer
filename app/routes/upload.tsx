@@ -3,7 +3,7 @@ import Navbar from '~/components/Navbar'
 import FileUploader from '~/components/FileUploader'
 import { usePuterStore } from '~/lib/puter'
 import { convertPdfToImage } from '~/lib/pdf2img'
-import { generateUUID } from '~/lib/formatSize'
+import { generateUUID } from '~/lib/utils'
 import { prepareInstructions } from '../../constants'
 import { useNavigate } from 'react-router';
 const Upload = () => {

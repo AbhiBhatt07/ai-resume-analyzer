@@ -68,25 +68,25 @@ const resume = () => {
                 <section className="feedback-section bg-[url('/images/bg-small.svg')] bg-cover h-screen sticky items-center top-0 justify-center">
 
                     {imgaeUrl && resumeUrl && (
-                        <div className="animate-in fade-in duration-1000 gradient-border max-sm:m-0 h-[90%] max-wxl:h-fit w-fit">
+                        <div className="animate-in fade-in duration-1000 gradient-border max-sm:m-0 h-full max-wxl:h-fit w-fit">
 
-                            <a href={resumeUrl} target="_blank" rel="noopener noreferrer"  >
+                            <a href={resumeUrl} target="_blank" rel="noopener noreferrer" >
                                 <img src={imgaeUrl} alt="" className="w-full h-full object-contain rounded-2xl" />
                             </a>
                         </div>
                     )}
                 </section>
-                <section>
+                <section className="feedback-section">
                     <h2 className="text-4xl text-black! font-bold">Resume Review</h2>
                     {feedback ? (
                         <div className="flex flex-col gap-8 animate-in fade-in duration-1000">
                             <Summary feedback={feedback} />
-                            <ATS score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []}/>
+                            <ATS score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []} />
                             <Details feedback={feedback} />
                         </div>
                     ) : (
                         // Loading state gif
-                        <img src="/images/resume-scan-2.gif" className="w-1/5" />
+                        <img src="/images/resume-scan-2.gif" className="w-1/2" />
                     )}
                 </section>
             </div>

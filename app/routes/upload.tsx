@@ -98,7 +98,7 @@ const Upload = () => {
   return (
     <main className="bg-dark-bg min-h-screen">
       <Navbar />
-      <section className="main-section py-20">
+      <section className="main-section">
         <div className="page-heading">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Sparkles className="w-8 h-8 text-accent" />

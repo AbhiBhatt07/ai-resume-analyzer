@@ -55,7 +55,7 @@ const resume = () => {
       <nav className="resume-nav">
         <Link to="/" className="back-button">
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Dashboard</span>
+          <span className="gradient-text-purple">Back to Dashboard</span>
         </Link>
       </nav>
       <div className="flex flex-row w-full max-lg:flex-col-reverse">
@@ -79,7 +79,8 @@ const resume = () => {
           )}
         </section>
         <section className="feedback-section">
-          <h2 className="text-3xl font-bold text-white">Resume Analysis</h2>
+          <h2 className="text-3xl font-bold text-white">Resume <span className="gradient-text-purple">
+            Analysis </span></h2>
           {feedback ? (
             <div className="flex flex-col gap-8 animate-in fade-in duration-1000">
               <Summary feedback={feedback} />

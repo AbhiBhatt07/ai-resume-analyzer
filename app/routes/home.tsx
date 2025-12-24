@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { FileText, Upload, Loader2 } from "lucide-react";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Resumind" },
     { name: "description", content: "Smart feedback for your dream job!" },
@@ -28,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     const loadResumes = async () => {
       setLoadingResumes(true);
-      const resumes = (await kv.list('resume:*', true)) as KVItem[];
+      const resumes = (await kv.list('resume-*', true)) as KVItem[];
       const parsedResumes = resumes?.map((resume) => JSON.parse(resume.value) as Resume);
       setResumes(parsedResumes || []);
       setLoadingResumes(false);
@@ -40,10 +40,13 @@ export default function Home() {
     <main className="bg-dark-bg min-h-screen">
       <Navbar />
       <section className="main-section">
-        <div className="page-heading py-20">
-          <h1 className="max-w-4xl">Track Your Applications & Resume Ratings</h1>
+        <div className="page-heading ">
+          <h1 className="max-w-4xl gradient-text-neon">Track Your Applications & Resume Ratings</h1>
           {!loadingResumes && resumes?.length === 0 ? (
-            <h2 className="max-w-2xl">No resumes found. Upload your first resume to get instant AI-powered feedback.</h2>
+            <h2 className="max-w-2xl gradient-text-blue">No resumes found. Upload your first resume to get instant <span className="gradient-text-sunset">
+              AI-powered feedback
+            </span>
+            </h2>
           ) : (
             <h2 className="max-w-2xl">Review your submissions and check AI-powered feedback</h2>
           )}
@@ -52,7 +55,7 @@ export default function Home() {
         {loadingResumes && (
           <div className="flex flex-col items-center justify-center py-20 gap-4">
             <Loader2 className="w-12 h-12 text-accent animate-spin" />
-            <p className="text-zinc-400">Loading your resumes...</p>
+            <p className="gradient-text-blue">Loading your resumes...</p>
           </div>
         )}
 

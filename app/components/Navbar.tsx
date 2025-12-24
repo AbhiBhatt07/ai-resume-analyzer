@@ -12,6 +12,9 @@ const Navbar = () => {
         <Upload className="w-4 h-4" />
         Upload Resume
       </Link>
+      <Link to="/wipe" className='bg-red-500 hover:bg-red-600 primary-button w-auto flex items-center gap-2'>
+      Delete Resume's
+      </Link>
     </nav>
   );
 };
